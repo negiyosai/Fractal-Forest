@@ -1,30 +1,55 @@
-var angle = 0;
-var divideValue = 0.7;
-
+var tree = [];
+var leaves = [];
+var counter = 0;
 function setup() {
     createCanvas(500, 500);
-    slider = createSlider(0, TWO_PI, PI / 4, 0.001);
+    var a = createVector(width / 2, height);
+    var b = createVector(width / 2, height - 100);
+    var root = new Branch(a, b);
+
+    tree[0] = root;
+
+}
+
+function mousePressed() {
+
+    /*counter++;
+    if (counter > 3) {
+        clear();
+        counter = 0;
+    } */
+
+    for (var i = tree.length - 1; i >= 0; i--) {
+        if (!tree[i].finished) {
+            tree.push(tree[i].branchA());
+            tree.push(tree[i].branchB());
+        }
+        tree[i].finished = true;
+    }
+
+    counter++;
+    if (counter == 5) {
+        for (var i = 0; i < tree.length; i++) {
+            if (!tree[i].finished) {
+                var leaf = tree[i].end.copy();
+                leaves.push(leaf);
+            }
+        }
+    }
 }
 
 function draw() {
-    background(51);
-    angle = slider.value();
-    stroke(255);
-    translate(250, height);
-    branch(100);
-}
 
-function branch(len) {
-    line(0, 0, 0, - len);
-    translate(0, -len);
-    if (len > 4) {
-        push();
-        rotate(angle);
-        branch(len * divideValue)
-        pop();
-        push();
-        rotate(-angle);
-        branch(len * divideValue);
-        pop();
+    background(4, 178, 253);
+    for (var i = 0; i < tree.length; i++) {
+        tree[i].show();
+        //tree[i].jitter();
+
+    }
+
+    for (var i = 0; i < leaves.length; i++) {
+        fill(0, 255, 0, 255);
+        noStroke();
+        ellipse(leaves[i].x, leaves[i].y, 25, 25);
     }
 }
