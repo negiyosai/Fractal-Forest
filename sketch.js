@@ -5,6 +5,7 @@ var counter = 0;
 var starX = [];
 var starY = [];
 
+
 function setup() {
 
     createCanvas(windowWidth, windowHeight);
@@ -17,9 +18,11 @@ function setup() {
 
     tree[0] = root;
 
+    createForest();
+
 }
 
-function mousePressed() {
+function createForest() {
 
     for (var i = 0; i < 3; i++) {
 
@@ -41,7 +44,9 @@ function mousePressed() {
             }
         }
     }
+
 }
+
 
 function draw() {
 
@@ -66,7 +71,7 @@ function drawTree() {
 
     //Show Leaves
     for (var i = 0; i < leaves.length; i++) {
-        fill(color1);
+        fill(7, 11, 52);
         noStroke();
         ellipse(leaves[i].x, leaves[i].y, 25, 25);
     }
@@ -74,7 +79,7 @@ function drawTree() {
 
 
 function getStarPositions() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 70; i++) {
         starX[i] = random(windowWidth);
         starY[i] = random(windowHeight - 250);
     }
@@ -82,11 +87,15 @@ function getStarPositions() {
 
 function drawStars() {
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 70; i++) {
         noStroke();
-        fill(255, 255, 0);
+        fill(255, 255, 255);
         ellipse(starX[i], starY[i], 2, 2);
     }
+
+    noStroke();
+    fill(230, 230, 230);
+    ellipse(200, 150, 90, 90);
 }
 
 
