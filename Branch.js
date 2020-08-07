@@ -10,30 +10,29 @@ function Branch(begin, end) {
     }*/
 
     this.show = function () {
-        stroke(51, 0, 0);
+        stroke(6, 6, 150);
+        strokeWeight(5)
         line(this.begin.x, this.begin.y, this.end.x, this.end.y);
     }
 
-    this.branchA = function () {
+    this.branchLeft = function () {
         var dir = p5.Vector.sub(this.end, this.begin);
         dir.rotate(PI / 4);
-        dir.mult(0.67);
+        dir.mult(0.3);
         var newEnd = p5.Vector.add(this.end, dir);
-
-        var b = new Branch(this.end, newEnd);
-
-        return b;
+        var left = new Branch(this.end, newEnd);
+        return left;
     }
 
-    this.branchB = function () {
+    this.branchRight = function () {
         var dir = p5.Vector.sub(this.end, this.begin);
         dir.rotate(-PI / 4);
         dir.mult(0.67);
 
         var newEnd = p5.Vector.add(this.end, dir);
 
-        var b = new Branch(this.end, newEnd);
+        var right = new Branch(this.end, newEnd);
 
-        return b;
+        return right;
     }
 }
