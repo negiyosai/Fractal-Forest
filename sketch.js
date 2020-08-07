@@ -2,10 +2,14 @@ var tree = [];
 var leaves = [];
 var counter = 0;
 
-
+var starX = [];
+var starY = [];
 
 function setup() {
+
     createCanvas(windowWidth, windowHeight);
+
+    getStarPositions();
 
     var a = createVector(width / 2, height);
     var b = createVector(width / 2, height - 100);
@@ -40,10 +44,19 @@ function mousePressed() {
 }
 
 function draw() {
+
     //Gradient Show
-    var color1 = color(0, 0, 153);
-    var color2 = color(204, 51, 0);
+    var color1 = color(7, 11, 52);  //top
+    var color2 = color(133, 89, 136); //bottom
     setGradient(0, 0, windowWidth, windowHeight, color1, color2, "Y");
+
+    drawTree();
+
+    drawStars();
+
+}
+
+function drawTree() {
 
     //Show Tree
     for (var i = 0; i < tree.length; i++) {
@@ -51,31 +64,41 @@ function draw() {
         //tree[i].jitter();
     }
 
+    //Show Leaves
     for (var i = 0; i < leaves.length; i++) {
-        fill(6, 6, 150, 255);
+        fill(color1);
         noStroke();
-        ellipse(leaves[i].x, leaves[i].y, 20, 20);
+        ellipse(leaves[i].x, leaves[i].y, 25, 25);
     }
 }
 
-//Setting Gradient
 
+function getStarPositions() {
+    for (let i = 0; i < 50; i++) {
+        starX[i] = random(windowWidth);
+        starY[i] = random(windowHeight - 250);
+    }
+}
+
+function drawStars() {
+
+    for (let i = 0; i < 50; i++) {
+        noStroke();
+        fill(255, 255, 0);
+        ellipse(starX[i], starY[i], 2, 2);
+    }
+}
+
+
+//Setting Gradient
 function setGradient(x, y, w, h, c1, c2, axis) {
     noFill();
     if (axis == "Y") {  // Top to bottom gradient
         for (let i = y; i <= y + h; i++) {
-            var inter = map(i, y, y + h, 0, 1);
+            var inter = map(i, y, y + (h * 1.3), 0, 1);
             var c = lerpColor(c1, c2, inter);
             stroke(c);
             line(x, i, x + w, i);
-        }
-    }
-    else if (axis == "X") {  // Left to right gradient
-        for (let j = x; j <= x + w; j++) {
-            var inter2 = map(j, x, x + w, 0, 1);
-            var d = lerpColor(c1, c2, inter2);
-            stroke(d);
-            line(j, y, j, y + h);
         }
     }
 }

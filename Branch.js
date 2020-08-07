@@ -10,7 +10,7 @@ function Branch(begin, end) {
     }*/
 
     this.show = function () {
-        stroke(6, 6, 150);
+        stroke(7, 27, 52);
         strokeWeight(5)
         line(this.begin.x, this.begin.y, this.end.x, this.end.y);
     }
