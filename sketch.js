@@ -1,4 +1,5 @@
 var tree = [];
+
 var leaves = [];
 var counter = 0;
 
@@ -12,25 +13,26 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
 
     //create stars
-    for (var i = 0; i < 50; i++) {
+    for (let i = 0; i < 50; i++) {
         stars[i] = new Star();
     }
 
-    var a = createVector(width / 2, height);
-    var b = createVector(width / 2, height - 100);
-    var root = new Branch(a, b);
+    let a = createVector(width / 2, height);
+    let b = createVector(width / 2, height - 100);
+    let root = new Branch(a, b);
 
     tree[0] = root;
 
-    createForest();
+    createTree();
 
 }
 
-function createForest() {
+function createTree() {
 
-    for (var i = 0; i < 3; i++) {
+let branchEnd = 3;
+    for (let i = 0; i < branchEnd; i++) {
 
-        for (var i = tree.length - 1; i >= 0; i--) {
+        for (let i = tree.length - 1; i >= 0; i--) {
             if (!tree[i].finished) {
                 tree.push(tree[i].branchLeft());
                 tree.push(tree[i].branchRight());
@@ -39,10 +41,10 @@ function createForest() {
         }
 
         counter++;
-        if (counter == 5) {
-            for (var i = 0; i < tree.length; i++) {
+        if (counter == branchEnd) {
+            for (let i = 0; i < tree.length; i++) {
                 if (!tree[i].finished) {
-                    var leaf = tree[i].end.copy();
+                    let leaf = tree[i].end.copy();
                     leaves.push(leaf);
                 }
             }
@@ -65,13 +67,12 @@ function draw() {
 function drawTree() {
 
     //Show Tree
-    for (var i = 0; i < tree.length; i++) {
+    for (let i = 0; i < tree.length; i++) {
         tree[i].show();
-        //tree[i].jitter();
     }
 
     //Show Leaves
-    for (var i = 0; i < leaves.length; i++) {
+    for (let i = 0; i < leaves.length; i++) {
         fill(7, 11, 52);
         noStroke();
         ellipse(leaves[i].x, leaves[i].y, 25, 25);
@@ -81,9 +82,10 @@ function drawTree() {
 
 function drawStars() {
 
-    for (var i = 0; i < stars.length; i++) {
+    for (let i = 0; i < stars.length; i++) {
         stars[i].draw();
     }
+
     //moon
     noStroke();
     fill(230, 230, 230, 50);
@@ -96,10 +98,10 @@ function drawStars() {
     ellipse(200, 150, 70, 70);
 }
 
-//Show Gradient
+//draw Gradient
 function drawGradient() {
-    var color1 = color(7, 11, 52);  //top
-    var color2 = color(133, 89, 136); //bottom
+    let color1 = color(7, 11, 52);  //top
+    let color2 = color(133, 89, 136); //bottom
     setGradient(0, 0, windowWidth, windowHeight, color1, color2, "Y");
 
 }
@@ -110,8 +112,8 @@ function setGradient(x, y, w, h, c1, c2, axis) {
     noFill();
     if (axis == "Y") {  // Top to bottom gradient
         for (let i = y; i <= y + h; i++) {
-            var inter = map(i, y, y + (h * 1.3), 0, 1);
-            var c = lerpColor(c1, c2, inter);
+            let inter = map(i, y, y + (h * 1.3), 0, 1);
+            let c = lerpColor(c1, c2, inter);
             stroke(c);
             line(x, i, x + w, i);
         }
@@ -129,7 +131,7 @@ class Star {
 
     draw() {
         this.t += 0.1;
-        var scale = this.size + sin(this.t) * 0.8;
+        let scale = this.size + sin(this.t) * 0.8;
         noStroke();
         fill(255, 255, 255);
 
