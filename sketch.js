@@ -1,34 +1,30 @@
 //var leaves = [];
 var counter = 0;
 
-var leaves = [];
-
 var starX = [];
 var starY = [];
 var stars = [];
 
-forestSize = 5;
+let forestSize;
 
 
 function setup() {
 
     createCanvas(windowWidth, windowHeight);
 
-
-
     initStars();
 
+    forestSize = random(20, 30);
     //create tree array variables 
     for (let i = 0; i < forestSize; i++) {
         this['tree' + i] = [];
-        //this['leaves' + i] = [];
+        this['leaves' + i] = [];
     }
 
     for (let i = 0; i < forestSize; i++) {
-        //createTree(i);
+        createTree(i);
     }
 
-    createTree(0);
 
 }
 
@@ -69,17 +65,19 @@ function createTree(num) {
         }
 
         counter++;
-        if (counter == branchEnd) {
+        leafSpawnChance = random(0, 1);
+        if (counter == branchEnd && leafSpawnChance > 0.2) {
             for (let i = 0; i < this['tree' + num].length; i++) {
                 if (!this['tree' + num][i].finished) {
-                    console.log("Does this even run");
                     let leaf = this['tree' + num][i].end.copy();
-                    leaves.push(leaf);
+                    this['leaves' + num].push(leaf);
                 }
             }
+
         }
     }
 
+    counter = 0;
 }
 
 
@@ -89,10 +87,9 @@ function draw() {
     drawStars();
 
     for (let i = 0; i < forestSize; i++) {
-        //drawTree(i);
+        drawTree(i);
     }
 
-    drawTree(0);
 }
 
 function drawTree(num) {
@@ -103,10 +100,10 @@ function drawTree(num) {
     }
 
     //Show Leaves
-    for (let i = 0; i < leaves.length; i++) {
+    for (let i = 0; i < this['leaves' + num].length; i++) {
         fill(7, 11, 52);
         noStroke();
-        ellipse(leaves[i].x, leaves[i].y, 25, 25);
+        ellipse(this['leaves' + num][i].x, this['leaves' + num][i].y, 25, 25);
     }
 }
 
@@ -161,7 +158,7 @@ class Star {
 
     draw() {
         this.t += 0.1;
-        let scale = this.size + sin(this.t) * 0.8;
+        let scale = this.size + sin(this.t) * 2;
         noStroke();
         fill(255, 255, 255);
 
