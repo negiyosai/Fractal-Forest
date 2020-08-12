@@ -1,4 +1,13 @@
-var tree = [];
+/*var tree0 = [];
+var tree1 = [];
+var tree2 = [];
+var tree3 = [];
+var tree4 = [];
+var tree5 = [];
+var tree6 = [];
+var tree7 = [];
+var tree8 = [];
+var tree9 = []; */
 
 var leaves = [];
 var counter = 0;
@@ -10,12 +19,20 @@ var stars = [];
 
 function setup() {
 
-
     createCanvas(windowWidth, windowHeight);
+
+
 
     initStars();
 
-    createTree();
+    //create tree array variables 
+    for (let i = 0; i < 10; i++) {
+        this['tree' + i] = [];
+    }
+
+    for (let i = 0; i < 10; i++) {
+        createTree(i);
+    }
 
 }
 
@@ -27,31 +44,39 @@ function initStars() {
 }
 
 
-function createTree() {
+function createTree(num) {
 
-    let widthDiv = random(-0.01, 0.01)
-    let a = createVector(width / 2, height);
-    let b = createVector(width / (2 - random(-0.01, 0.01)), height - random(120, 180));
+    widthVal = random(1, width)
+
+    if (widthVal > width / 2) {
+        endRootVal = widthVal - (widthVal / random(0, 100));
+    }
+    else {
+        endRootVal = widthVal + (widthVal / random(0, 100));
+    }
+
+    let a = createVector(widthVal, height);
+    let b = createVector(endRootVal, height - random(120, 180));
     let root = new Branch(a, b);
 
-    tree[0] = root;
+    this['tree' + num][0] = root;
 
-    let branchEnd = 6;
+    let branchEnd = random(4, 7);
     for (let i = 0; i < branchEnd; i++) {
 
-        for (let i = tree.length - 1; i >= 0; i--) {
-            if (!tree[i].finished) {
-                tree.push(tree[i].branchLeft());
-                tree.push(tree[i].branchRight());
+        for (let i = this['tree' + num].length - 1; i >= 0; i--) {
+            if (!this['tree' + num][i].finished) {
+                this['tree' + num].push(this['tree' + num][i].branchLeft());
+                this['tree' + num].push(this['tree' + num][i].branchRight());
             }
-            tree[i].finished = true;
+            this['tree' + num][i].finished = true;
         }
 
         counter++;
         if (counter == branchEnd) {
-            for (let i = 0; i < tree.length; i++) {
-                if (!tree[i].finished) {
-                    let leaf = tree[i].end.copy();
+            for (let i = 0; i < tree0.length; i++) {
+                if (!this['tree' + num][i].finished) {
+                    let leaf = this['tree' + num][i].end.copy();
                     leaves.push(leaf);
                 }
             }
@@ -65,14 +90,16 @@ function draw() {
 
     drawGradient();
     drawStars();
-    drawTree();
+    for (let i = 0; i < 10; i++) {
+        drawTree(i);
+    }
 }
 
-function drawTree() {
+function drawTree(num) {
 
     //Show Tree
-    for (let i = 0; i < tree.length; i++) {
-        tree[i].show();
+    for (let i = 0; i < this['tree' + num].length; i++) {
+        this['tree' + num][i].show();
     }
 
     //Show Leaves
