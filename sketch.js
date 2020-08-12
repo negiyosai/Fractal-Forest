@@ -1,20 +1,13 @@
-/*var tree0 = [];
-var tree1 = [];
-var tree2 = [];
-var tree3 = [];
-var tree4 = [];
-var tree5 = [];
-var tree6 = [];
-var tree7 = [];
-var tree8 = [];
-var tree9 = []; */
+//var leaves = [];
+var counter = 0;
 
 var leaves = [];
-var counter = 0;
 
 var starX = [];
 var starY = [];
 var stars = [];
+
+forestSize = 5;
 
 
 function setup() {
@@ -26,13 +19,16 @@ function setup() {
     initStars();
 
     //create tree array variables 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < forestSize; i++) {
         this['tree' + i] = [];
+        //this['leaves' + i] = [];
     }
 
-    for (let i = 0; i < 10; i++) {
-        createTree(i);
+    for (let i = 0; i < forestSize; i++) {
+        //createTree(i);
     }
+
+    createTree(0);
 
 }
 
@@ -49,19 +45,19 @@ function createTree(num) {
     widthVal = random(1, width)
 
     if (widthVal > width / 2) {
-        endRootVal = widthVal - (widthVal / random(0, 100));
+        endRootVal = widthVal - (widthVal / random(1, 500));
     }
     else {
-        endRootVal = widthVal + (widthVal / random(0, 100));
+        endRootVal = widthVal + (widthVal / random(1, 500));
     }
 
     let a = createVector(widthVal, height);
-    let b = createVector(endRootVal, height - random(120, 180));
+    let b = createVector(endRootVal, height - random(40, 180));
     let root = new Branch(a, b);
 
     this['tree' + num][0] = root;
 
-    let branchEnd = random(4, 7);
+    let branchEnd = 6;
     for (let i = 0; i < branchEnd; i++) {
 
         for (let i = this['tree' + num].length - 1; i >= 0; i--) {
@@ -74,8 +70,9 @@ function createTree(num) {
 
         counter++;
         if (counter == branchEnd) {
-            for (let i = 0; i < tree0.length; i++) {
+            for (let i = 0; i < this['tree' + num].length; i++) {
                 if (!this['tree' + num][i].finished) {
+                    console.log("Does this even run");
                     let leaf = this['tree' + num][i].end.copy();
                     leaves.push(leaf);
                 }
@@ -90,9 +87,12 @@ function draw() {
 
     drawGradient();
     drawStars();
-    for (let i = 0; i < 10; i++) {
-        drawTree(i);
+
+    for (let i = 0; i < forestSize; i++) {
+        //drawTree(i);
     }
+
+    drawTree(0);
 }
 
 function drawTree(num) {
@@ -136,7 +136,6 @@ function drawGradient() {
     setGradient(0, 0, windowWidth, windowHeight, color1, color2, "Y");
 
 }
-
 
 //Setting Gradient
 function setGradient(x, y, w, h, c1, c2, axis) {
