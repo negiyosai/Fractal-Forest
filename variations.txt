@@ -1,11 +1,6 @@
-color variation
-
-root variation
-
-stroke weight?
-
-dir.rotate 
-
 dir.mult
 
 branchend
+
+leaf size variation?
+

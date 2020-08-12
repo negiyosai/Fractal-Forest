@@ -10,26 +10,33 @@ var stars = [];
 
 function setup() {
 
+
     createCanvas(windowWidth, windowHeight);
 
-    //create stars
-    for (let i = 0; i < 50; i++) {
-        stars[i] = new Star();
-    }
-
-    let a = createVector(width / 2, height);
-    let b = createVector(width / 2, height - 100);
-    let root = new Branch(a, b);
-
-    tree[0] = root;
+    initStars();
 
     createTree();
 
 }
 
+function initStars() {
+    for (let i = 0; i < 50; i++) {
+        stars[i] = new Star();
+    }
+
+}
+
+
 function createTree() {
 
-let branchEnd = 3;
+    let widthDiv = random(-0.01, 0.01)
+    let a = createVector(width / 2, height);
+    let b = createVector(width / (2 - random(-0.01, 0.01)), height - random(120, 180));
+    let root = new Branch(a, b);
+
+    tree[0] = root;
+
+    let branchEnd = 6;
     for (let i = 0; i < branchEnd; i++) {
 
         for (let i = tree.length - 1; i >= 0; i--) {
@@ -57,11 +64,8 @@ let branchEnd = 3;
 function draw() {
 
     drawGradient();
-
-    drawTree();
-
     drawStars();
-
+    drawTree();
 }
 
 function drawTree() {
