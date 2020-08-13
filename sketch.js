@@ -1,4 +1,3 @@
-//var leaves = [];
 var counter = 0;
 
 var starX = [];
