@@ -1,4 +1,3 @@
-//constructor function
 function Branch(begin, end) {
 
     this.begin = begin;

@@ -7,7 +7,7 @@ var stars = [];
 let forestSize;
 
 function preload() {
-    myFont = loadFont('assets/WorkSans-Regular.ttf');
+    myFont = loadFont('assets/HalvamediumRegular.otf');
 }
 
 function setup() {
@@ -18,7 +18,7 @@ function setup() {
     initStars();
 
     forestSize = random(20, 30);
-    //create tree array variables 
+    //create tree and leaves array variables 
     for (let i = 0; i < forestSize; i++) {
         this['tree' + i] = [];
         this['leaves' + i] = [];
@@ -95,12 +95,13 @@ function draw() {
         drawTree(i);
     }
 
-    textSize(30);
+    //text
+    textSize(25);
     fill(230)
-    text('F r a c t a l    F o r e s t', 130, 260);
+    text('F r a c t a l    F o r e s t', 130, 270);
 
-    textSize(18);
-    text('~   V i v e k   S i n g h   N e g i', 130, 300);
+    textSize(15);
+    text('~ V i v e k   S i n g h   N e g i', 130, 310);
 
 }
 
@@ -138,7 +139,6 @@ function drawStars() {
     ellipse(200, 130, 70, 70);
 }
 
-//draw Gradient
 function drawGradient() {
     let color1 = color(7, 11, 52);  //top
     let color2 = color(133, 89, 136); //bottom
@@ -146,7 +146,6 @@ function drawGradient() {
 
 }
 
-//Setting Gradient
 function setGradient(x, y, w, h, c1, c2, axis) {
     noFill();
     if (axis == "Y") {  // Top to bottom gradient
@@ -159,7 +158,6 @@ function setGradient(x, y, w, h, c1, c2, axis) {
     }
 }
 
-// Stars //
 class Star {
     constructor() {
         this.x = random(windowWidth);
