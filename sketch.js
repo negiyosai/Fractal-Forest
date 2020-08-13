@@ -7,10 +7,14 @@ var stars = [];
 
 let forestSize;
 
+function preload() {
+    myFont = loadFont('assets/WorkSans-Regular.ttf');
+}
 
 function setup() {
 
     createCanvas(windowWidth, windowHeight);
+    textFont(myFont);
 
     initStars();
 
@@ -84,11 +88,20 @@ function createTree(num) {
 function draw() {
 
     drawGradient();
+
     drawStars();
+
 
     for (let i = 0; i < forestSize; i++) {
         drawTree(i);
     }
+
+    textSize(30);
+    fill(230)
+    text('F r a c t a l    F o r e s t', 130, 260);
+
+    textSize(18);
+    text('~   V i v e k   S i n g h   N e g i', 130, 300);
 
 }
 
@@ -117,13 +130,13 @@ function drawStars() {
     //moon
     noStroke();
     fill(230, 230, 230, 50);
-    ellipse(200, 150, 170, 170);
+    ellipse(200, 130, 170, 170);
     fill(230, 230, 230, 150);
-    ellipse(200, 150, 130, 130);
+    ellipse(200, 130, 130, 130);
     fill(230, 230, 230, 200);
-    ellipse(200, 150, 110, 110);
+    ellipse(200, 130, 110, 110);
     fill(230, 230, 230);
-    ellipse(200, 150, 70, 70);
+    ellipse(200, 130, 70, 70);
 }
 
 //draw Gradient
