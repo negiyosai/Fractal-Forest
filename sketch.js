@@ -96,10 +96,12 @@ function draw() {
     }
 
     //text
+    noStroke();
     textSize(25);
     fill(230)
     text('F r a c t a l    F o r e s t', 130, 270);
 
+    noStroke();
     textSize(15);
     text('~ V i v e k   S i n g h   N e g i', 130, 310);
 
