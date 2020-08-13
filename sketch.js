@@ -4,7 +4,8 @@ var starX = [];
 var starY = [];
 var stars = [];
 
-let forestSize;
+var forestSize;
+var resetButton
 
 function preload() {
     myFont = loadFont('assets/HalvamediumRegular.otf');
@@ -28,7 +29,17 @@ function setup() {
         createTree(i);
     }
 
+    resetButton = createImg('assets/restartIcon.png');
+    resetButton.size(20, 20);
+    resetButton.position(530, 252);
+    resetButton.mousePressed(resetSketch);
+}
 
+function resetSketch() {
+    clear();
+    resetButton.remove();
+    setup();
+    console.log("YES")
 }
 
 function initStars() {
@@ -98,7 +109,7 @@ function draw() {
     //text
     noStroke();
     textSize(25);
-    fill(230)
+    fill(255)
     text('F r a c t a l    F o r e s t', 130, 270);
 
     noStroke();
