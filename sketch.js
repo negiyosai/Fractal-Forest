@@ -39,7 +39,6 @@ function resetSketch() {
     clear();
     resetButton.remove();
     setup();
-    console.log("YES")
 }
 
 function initStars() {
