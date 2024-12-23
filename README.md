@@ -4,7 +4,7 @@ A randomly generated fractal forest made using p5.js
 
 ## Deployment 
 
-[negiyosai.com/fractalforest](https://negiyosai.com/fractalforest)
+[negiyosai.com/fractalforest](https://negiyosai.com/fractal-forest)
 
 ![Desktop Screenshot](/assets/S1.png)
 
